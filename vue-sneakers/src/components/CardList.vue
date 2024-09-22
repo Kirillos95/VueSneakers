@@ -1,26 +1,27 @@
 <script setup>
+
 import CardItem from "./CardItem.vue";
 
 defineProps({
   items: Array
 })
+// Эмит для прокидывания ФУНКЦИЙ в родителя , а пропс для передачи данных
+const emit = defineEmits(['addToFavorite'])
 
-const onClickAdd = () => {
-  alert('Добавить')
-}
-const onClickFavorite = () => {
-  alert('Добавлено')
-}
 </script>
+
+
 <template>
   <div class="grid grid-cols-4 gap-5">
     <CardItem 
               v-for="item in items"
               :key="item.id"
+              :id="item.id"
               :title="item.title"
               :imageURL="item.imageUrl"
-              :price="item.price"
-              :onClickAdd = "onClickAdd"   
+              :price="item.price"     
+              :onClickFavorite ="() => emit('addToFavorite', item)"
+              :isFavorite="item.isFavorite"  
               />
   </div>
 </template>

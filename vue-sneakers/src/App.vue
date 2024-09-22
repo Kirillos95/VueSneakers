@@ -1,7 +1,7 @@
 <script setup>
-import { onMounted, ref, reactive, watch } from 'vue'
-
+import { onMounted, ref, reactive,provide, watch } from 'vue'
 import axios from 'axios'
+
 import Header from './components/Header.vue'
 import CardList from './components/CardList.vue'
 import Drawer from './components/Drawer.vue'
@@ -25,7 +25,7 @@ const onChangeSearchInput = (event) => {
 
 const fetchFavorites = async () => {
   try {
-    const { data: favorites } = await axios.get(`https://06ed816abc72f69c.mokky.dev/fav`)
+    const { data: favorites } = await axios.get(`https://06ed816abc72f69c.mokky.dev/favorites`)
 
     items.value = items.value.map((item) => {
       const favorite = favorites.find((favorite) => favorite.parentId === item.id)
@@ -33,21 +33,45 @@ const fetchFavorites = async () => {
       if (!favorite) {
         return item
       }
-       else {
-        return {
+
+      return { 
         ...item,
         isFavorite: true,
         favoriteId : favorite.id
       }
-      }
     })
 
-    console.log(items.value)
-
   } catch (error) {
-    console.log('error')
+    console.log('error fetchFavorites', error)
   }
 }
+
+const addToFavorite = async (item) => {
+
+    try {
+
+     if (!item.isFavorite) {
+       const obj = {
+        parentId: item.id,
+      }
+      
+      item.isFavorite = true
+      const { data } = await axios.post(`https://06ed816abc72f69c.mokky.dev/favorites`, obj)
+      item.favoriteId = data.id
+
+    }
+    else {
+      item.isFavorite = false
+      await axios.delete(`https://06ed816abc72f69c.mokky.dev/favorites/${item.favoriteId}`)
+
+      item.favoriteId = null
+    }
+     }
+    catch (error) {
+      console.log('error addToFavorite', error)
+    }
+  }
+
 // Запрос на сервер при каждом изменении filters или при первом рендере
 const fetchItems = async () => {
   try {
@@ -67,11 +91,12 @@ const fetchItems = async () => {
     items.value = data.map((obj) => ({
       ...obj,
       isFavorite: false,
-      isAdded: false
+      isAdded: false,
+      favoriteId: null,
 
     }))
   } catch (error) {
-    console.log('error')
+    console.log('error fetchItems', error)
   }
 }
 // fetch('https://604781a0efa572c1.mokky.dev/items')
@@ -88,7 +113,7 @@ onMounted(async () => {
 }) 
 // следит за изменением значения sortBy и сортирует товары
 watch(filters, fetchItems)
-
+provide('addToFavorite', addToFavorite)
 </script>
 
 <template>
@@ -118,7 +143,7 @@ watch(filters, fetchItems)
       </div>
 
       <div class="mt-10">
-        <CardList :items="items" />
+        <CardList :items="items" @addToFavorite="addToFavorite"/>
       </div>
     </div>
   </div>

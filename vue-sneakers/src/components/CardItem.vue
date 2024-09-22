@@ -1,19 +1,16 @@
 <script setup>
+
 defineProps({
+  id: Number,
   title: String,
   imageURL: String,
   price: Number,
   isFavorite: Boolean,
   isAdded: Boolean,
-  onClickAdd: Function,
-  onClickFavorite: Function
+  onClickFavorite: Function,
+  onClickAdd: Function
 })
-const onClickAdd = () => {
-  alert('Добавлено в корзину')
-}
-const onClickFavorite = () => {
-  alert('Добавлено в избранное')
-}
+
 </script>
 
 <template>
