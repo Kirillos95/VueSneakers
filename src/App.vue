@@ -17,6 +17,14 @@ const closeDrawer= () => {
 const openDrawer= () => {
   drawerOpen.value = true
 }
+/////// login modal
+const loginModal = ref(false)
+const openLoginModal = () => {
+  loginModal.value = true
+}
+const closeLoginModal = () => {
+  loginModal.value = false
+}
 // добавить в корзину
 const addToCart = (item) => {
   
@@ -41,7 +49,13 @@ provide('cart', {
   closeDrawer,
   openDrawer,
   addToCart,
-  removeFromCart
+  removeFromCart,
+})
+
+provide('loginModal', {
+  loginModal,
+  openLoginModal,
+  closeLoginModal
 })
 
 </script>
