@@ -7,7 +7,7 @@ defineProps({
   isFavorites: Boolean
 })
 // Эмит для прокидывания ФУНКЦИЙ в родителя , а пропс для передачи данных
-const emit = defineEmits(['addToFavorite', 'addToCart'])
+const emit = defineEmits(['addToFavorite', 'addToCart' ])
 
 </script>
 
@@ -22,7 +22,7 @@ const emit = defineEmits(['addToFavorite', 'addToCart'])
               :imageURL="item.imageUrl"
               :price="item.price"     
               :onClickFavorite ="isFavorites ? null : () => emit('addToFavorite', item)"
-              :onClickAdd =" isFavorites ? null : () => emit('addToCart', item)"
+              :onClickAdd ="isFavorites ? null : () => emit('addToCart', item)"
               :isFavorite="item.isFavorite" 
               :isAdded="item.isAdded" 
               />
