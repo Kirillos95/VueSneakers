@@ -21,7 +21,7 @@ const props = defineProps({
       <img
        v-if="onClickFavorite"
         :src="!isFavorite ? '/like-1.svg' : '/like-2.svg'"
-        alt="like 2" 
+        alt="like 1" 
         class="absolute top-8 left-8" 
         @click="onClickFavorite"
         />
@@ -36,11 +36,12 @@ const props = defineProps({
           <b>{{ price }} руб.</b>
         </div>
 
-        <img 
-          v-if="onClickFavorite"
-          @click="!isAdded ? onClickAdd() : null" 
-          :src="!isAdded ? '/plus.svg' : '/checked.svg'" 
-          alt="plus">
+        <img
+        v-if="onClickAdd"
+        @click="onClickAdd"
+        :src="!isAdded ? '/plus.svg' : '/checked.svg'"
+        alt="Plus"
+        />
 
       </div>
     </div>

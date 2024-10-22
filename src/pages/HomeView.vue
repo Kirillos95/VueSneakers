@@ -6,8 +6,8 @@ import debounce from 'lodash.debounce'
 
 import CardList from '../components/CardList.vue'
 
-const items = ref([])
 const {cart, addToCart, removeFromCart} = inject('cart')
+const items = ref([])
 
 // Фильтры (State реактивный)
 const filters = reactive({
@@ -45,9 +45,8 @@ const onClickAddPlus = (item) => {
   if (!item.isAdded) {
     addToCart(item)
   } else {
-    removeFromCart()
+    removeFromCart(item)
   }
-  
 }
 // Сортировка товаров в селекте тега HTML
 const onChangeSelect= (event) => {

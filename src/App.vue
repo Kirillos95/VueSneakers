@@ -19,10 +19,10 @@ const openDrawer= () => {
 }
 // добавить в корзину
 const addToCart = (item) => {
-  if (!item.isAdded) {
+  
     cart.value.push(item)
     item.isAdded = true
-  } 
+ 
   }
 // убрать из корзины
 const removeFromCart = (item) => {
