@@ -17,7 +17,7 @@ const props = defineProps({
 <template>
   <div>
     <div
-      class="bg--white relative border border-slate-200 rounded-3xl p-8 cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition ">
+      class="bg--white relative border border-slate-400 rounded-3xl p-8 cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition ">
       <img
        v-if="onClickFavorite"
         :src="!isFavorite ? '/like-1.svg' : '/like-2.svg'"
