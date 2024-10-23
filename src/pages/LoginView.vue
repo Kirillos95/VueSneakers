@@ -1,17 +1,15 @@
 <script setup>
-import { inject } from 'vue';
 
-const {closeLoginModal} = inject('loginModal')
 </script>
 <template>
 <div>
-    <div class=" fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70"></div>
+
    <!-- component -->
    <div class="flex justify-center items-center w-full">
         <form method='POST' action='#'>
             <div class=" z-20 relative mb-20 bg-zinc-800 px-10 py-8 rounded-xl w-screen shadow-cyan-500/60 shadow-xl max-w-sm">
                 <div class="space-y-4">
-                    <svg  @click="closeLoginModal"
+                    <svg
           class="cursor-pointer opacity-30 rotate-180 hover:opacity-100 transition hover:-translate-x-1" 
           width="16"
           height="14" 
